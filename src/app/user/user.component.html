@@ -1,0 +1,55 @@
+<div *ngIf='!showList' class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+        <div class="row">
+            <mat-card-header>
+                <button mat-raised-button color="primary" (click)="backToList()">Back</button>
+            </mat-card-header>
+        </div>
+
+        <div class="">
+            <form [formGroup]="signUp" class="">
+                <mat-card-content>
+                    <div class="col-lg-12 col-md-12" style="display: inline-flex;">
+                        <div class="col-lg-4 col-md-4">
+                            <mat-form-field class="full-width-field">
+                                <input matInput formControlName="firstName" placeholder="First Name">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <mat-form-field class="full-width-field">
+                                <input matInput formControlName="lastName" placeholder="Last Name">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <mat-form-field class="full-width-field">
+                                <input matInput type="email" formControlName="email" placeholder="Email">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12" style="display: inline-flex;">
+                        <div class="col-lg-4 col-md-4">
+                            <mat-form-field class="full-width-field">
+                                <input matInput formControlName="mobile" placeholder="Mobile Number">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-4 col-md-4 pt-3">
+                            <input id="file" type="file" class="form-control" (change)="onFileChange($event)">
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <img [src]="imageSrc" *ngIf="imageSrc" class="rounded-circle" alt="Cinque Terre" width="200" height="150">
+                        </div>
+
+                    </div>
+                </mat-card-content>
+                <div style="align-items: center;">
+                    <button mat-raised-button color="primary" [disabled]="signUp.invalid" (click)="save(signUp)">Save</button>
+                    <button mat-raised-button color="warn" (click)="cancel()" style="margin: 10px;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+</div>
+
+<div *ngIf='showList'>
+    <app-table [columns]="columns" [rows]=userData (addEvent)="AddUser($event)" (editEvent)="edit($event)" (deleteEvent)="delete($event)"></app-table>
+</div>

@@ -1,0 +1,41 @@
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+        <div class="col-lg-12 col-md-12" style="display: inline-flex; width: 100%;">
+            <div class="col-lg-10 col-md-10"></div>
+            <div class="col-lg-2 col-md-2">
+                <button mat-raised-button color="primary" (click)="addUser()">Add</button>
+            </div>
+        </div>
+        <table class='responsive' style="width: 100%;">
+            <thead>
+                <tr class="col-lg-12 col-md-12" style="display: inline-flex;">
+                    <th class="col-lg-1 col-md-1"></th>
+                    <th *ngFor="let colum of columns; let i = index" [ngClass]="colum.key == 'email' ? 'col-lg-3 col-md-3' : 'col-lg-2 col-md-2'">
+
+                        {{colum.title}}
+
+                    </th>
+                    <th class="col-lg-2 col-md-2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of rows" class="col-lg-12 col-md-12" style="display: inline-flex;">
+                    <td class="col-lg-1 col-md-1">
+                        <span *ngIf="row.fileSource">
+                            <img [src]="row.fileSource" class="rounded-circle" alt="Cinque Terre" width="50" height="35">
+                        </span>
+                    </td>
+                    <td *ngFor="let column of columns" [ngClass]="column.key == 'email' ? 'col-lg-3 col-md-3' : 'col-lg-2 col-md-2'">
+
+                        {{echo(row, column)}}
+
+                    </td>
+                    <td class="col-lg-2 col-md-2">
+                        <a (click)="edit(row)" class="link"><span class="fa fa-edit"></span></a>
+                        <a (click)="delete(row)" class="link"><span class="fa fa-trash"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card>
+</div>
